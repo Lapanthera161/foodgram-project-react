@@ -1,7 +1,9 @@
+from rest_framework import serializers
 from drf_extra_fields.fields import Base64ImageField
+
 from recipes.models import (Favorite, Ingredient, IngredientAmount, Recipe,
                             ShoppingCart, Tag)
-from rest_framework import serializers
+
 from users.serializers import CustomUserSerializer
 
 
@@ -46,17 +48,13 @@ class RecipeListSerializer(serializers.ModelSerializer):
     """
     tags = TagSerializer(many=True, read_only=True)
     author = CustomUserSerializer(read_only=True)
-    ingredients = serializers.SerializerMethodField(read_only=True)
+    ingredients = IngredientAmountSerializer(source='amounts',many=True)
     is_favorited = serializers.SerializerMethodField(read_only=True)
     is_in_shopping_cart = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = Recipe
         fields = '__all__'
-
-    def get_ingredients(self, obj):
-        queryset = IngredientAmount.objects.filter(recipe=obj)
-        return IngredientAmountSerializer(queryset, many=True).data
 
     def get_is_favorited(self, obj):
         request = self.context.get('request')
@@ -138,11 +136,15 @@ class RecipeSerializer(serializers.ModelSerializer):
 
     @staticmethod
     def create_ingredients(ingredients, recipe):
-        for ingredient in ingredients:
-            IngredientAmount.objects.create(
-                recipe=recipe, ingredient=ingredient['id'],
-                amount=ingredient['amount']
-            )
+        ingredients_list = []
+        for ingredient in ingredients:     
+            new_ingredient = IngredientAmount(
+                    recipe=recipe,
+                    ingredient=ingredient['id'],
+                    amount=ingredient['amount'],
+                )
+            ingredients_list.append(new_ingredient)
+        return IngredientAmount.objects.bulk_create(ingredients_list)
 
     @staticmethod
     def create_tags(tags, recipe):

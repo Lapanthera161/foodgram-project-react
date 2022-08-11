@@ -1,3 +1,4 @@
+from django.db.models import Sum
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django_filters.rest_framework import DjangoFilterBackend
@@ -100,23 +101,21 @@ class RecipeViewSet(ModelViewSet):
 
     @action(detail=False, methods=['get'],
             permission_classes=[IsAuthenticated])
-    def download_shopping_cart(self, request):
-        final_list = {}
-        ingredients = IngredientAmount.objects.filter(
-            recipe__carts__user=request.user).values_list(
-            'ingredient__name', 'ingredient__measurement_unit',
-            'amount', 'recipe__name'
+    def download_shopping_cart(self, request):    
+        ingredients = (IngredientAmount.objects.filter(
+            recipe__shopped_items__user=request.user)
+            .values("ingredient__name", "ingredient__measurement_unit")
+            .annotate(ingredient_amount=Sum("amount"))
+            .order_by("ingredient__name")
         )
-        for item in ingredients:
-            name = item[0]
-            if name not in final_list:
-                final_list[name] = {
-                    'measurement_unit': item[1],
-                    'amount': item[2],
-                    'recipe': item[3]
-                }
-            else:
-                final_list[name]['amount'] += item[2]
+        final_list = "\n".join(
+            [
+                f'{ingredient["ingredient__name"]} - '
+                f'{ingredient["ingredient_amount"]} '
+                f'{ingredient["ingredient__measurement_unit"]}'
+                for ingredient in ingredients
+            ]
+        )
         pdfmetrics.registerFont(
             TTFont('Handicraft', 'data/Handicraft.ttf', 'UTF-8'))
         response = HttpResponse(content_type='application/pdf')
