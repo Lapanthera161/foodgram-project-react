@@ -13,12 +13,15 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 
 DEBUG = False
 
-ALLOWED_HOSTS = [
-    '51.250.110.23',
-    'localhost',
-    '127.0.0.1',
-    'lapanthera.sytes.net',
-    '*',
+ALLOWED_HOSTS = ['*']
+
+CSRF_TRUSTED_ORIGINS = [
+    'http://*localhost',
+    'https://*localhost',
+    'http://*51.250.110.23',
+    'https://*51.250.110.23',
+    'https://*lapanthera.sytes.net',
+    'http://*lapanthera.sytes.net',
 ]
 
 INSTALLED_APPS = [
