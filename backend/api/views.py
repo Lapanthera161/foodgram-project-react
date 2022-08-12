@@ -101,7 +101,7 @@ class RecipeViewSet(ModelViewSet):
 
     @action(detail=False, methods=['get'],
             permission_classes=[IsAuthenticated])
-    def download_shopping_cart(self, request):    
+    def download_shopping_cart(self, request):
         ingredients = (IngredientAmount.objects.filter(
             recipe__shopped_items__user=request.user)
             .values("ingredient__name", "ingredient__measurement_unit")

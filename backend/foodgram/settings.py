@@ -8,9 +8,7 @@ load_dotenv(dotenv_path=env_path)
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.getenv(
-            'SECRET_KEY',
-            default='nvxdh5-1s_pykpj5j=_7_i*sr4irfmr4z(jbf!a2v5g5)yv(69')
+SECRET_KEY = os.getenv('SECRET_KEY', default='nvxdh5-1s_pykpj5j=_7_i*sr4irfmr4z(jbf!a2v5g5)yv(69')
 
 
 DEBUG = True
@@ -78,8 +76,7 @@ CORS_URLS_REGEX = r'^/api/.*$'
 
 DATABASES = {
     'default': {
-        'ENGINE': os.getenv(
-                 'DB_ENGINE', default='django.db.backends.postgresql'),
+        'ENGINE': os.getenv('DB_ENGINE', default='django.db.backends.postgresql'),
         'NAME': os.getenv('DB_NAME', default='postgres'),
         'USER': os.getenv('POSTGRES_USER', default='postgres'),
         'PASSWORD': os.getenv('POSTGRES_PASSWORD', default='postgres'),

@@ -47,7 +47,7 @@ class RecipeListSerializer(serializers.ModelSerializer):
     """
     tags = TagSerializer(many=True, read_only=True)
     author = CustomUserSerializer(read_only=True)
-    ingredients = IngredientAmountSerializer(source='amounts',many=True)
+    ingredients = IngredientAmountSerializer(source='amounts', many=True)
     is_favorited = serializers.SerializerMethodField(read_only=True)
     is_in_shopping_cart = serializers.SerializerMethodField(read_only=True)
 
@@ -136,12 +136,12 @@ class RecipeSerializer(serializers.ModelSerializer):
     @staticmethod
     def create_ingredients(ingredients, recipe):
         ingredients_list = []
-        for ingredient in ingredients:     
+        for ingredient in ingredients:
             new_ingredient = IngredientAmount(
-                    recipe=recipe,
-                    ingredient=ingredient['id'],
-                    amount=ingredient['amount'],
-                )
+                            recipe=recipe,
+                            ingredient=ingredient['id'],
+                            amount=ingredient['amount'],
+            )
             ingredients_list.append(new_ingredient)
         return IngredientAmount.objects.bulk_create(ingredients_list)
 
