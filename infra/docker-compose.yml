@@ -10,7 +10,7 @@ services:
       - ./.env
 
   backend:
-    image: lapanthera161foodgram_backend:latest
+    image: lapanthera161/foodgram_backend:latest
     restart: always
     volumes:
       - static_value:/app/backend_static/
