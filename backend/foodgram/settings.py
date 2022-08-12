@@ -11,13 +11,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY', default='nvxdh5-1s_pykpj5j=_7_i*sr4irfmr4z(jbf!a2v5g5)yv(69')
 
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
 CSRF_TRUSTED_ORIGINS = [
-    'http://*158.160.9.19',
-    'https://*158.160.9.19',
+    'http://*localhost',
+    'https://*localhost',
+    'http://*51.250.110.23',
+    'https://*51.250.110.23',
     'https://*lapanthera.sytes.net',
     'http://*lapanthera.sytes.net',
 ]
