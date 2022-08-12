@@ -8,8 +8,7 @@ load_dotenv(dotenv_path=env_path)
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.getenv(
-    "SECRET_KEY", default="nvxdh5-1s_pykpj5j=_7_i*sr4irfmr4z(jbf!a2v5g5)yv(69")
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 
 DEBUG = False
@@ -92,7 +91,8 @@ AUTH_USER_MODEL = "users.User"
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME':
-        'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'django.contrib.auth.password_validation.'
+        'UserAttributeSimilarityValidator',
     },
     {
         'NAME':
@@ -120,11 +120,11 @@ USE_L10N = True
 USE_TZ = True
 
 
-STATIC_URL = "/backend_static/"
-STATIC_ROOT = os.path.join(BASE_DIR, "backend_static")
+STATIC_URL = "/static/"
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
-MEDIA_URL = '/backend_media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'backend_media')
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -151,6 +151,6 @@ DJOSER = {
     },
     'PERMISSIONS': {
         'user': ['djoser.permissions.CurrentUserOrAdminOrReadOnly'],
-        'user_list': ['rest_framework.permissions.AllowAny']
+        'user_list': ['rest_framework.permissions.AllowAny'],
     },
 }
