@@ -18,8 +18,6 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 CSRF_TRUSTED_ORIGINS = [
-    'http://*localhost',
-    'https://*localhost',
     'http://*158.160.9.19',
     'https://*158.160.9.19',
     'https://*lapanthera.sytes.net',
