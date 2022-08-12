@@ -2,4 +2,3 @@
 # Foodgram, «Продуктовый помощник»
 
 foodgram_backend
-/
