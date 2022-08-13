@@ -16,7 +16,7 @@ POSTGRES_PASSWORD=postgres
 DB_HOST=db 
 DB_PORT=5432 
 ``` 
-## Как запустить проект: ## Запуск проекта в Docker контейнере
+## Запуск проекта в Docker контейнере
 
 - Установите Docker.
 
