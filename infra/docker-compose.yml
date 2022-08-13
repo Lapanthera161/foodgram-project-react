@@ -21,7 +21,7 @@ services:
       - ./.env
 
   frontend:
-    image: lapanthera161/foodgram_backend:latest
+    image: lapanthera161/foodgram_frontend:latest
     volumes:
       - ../frontend/:/app/result_build/
     depends_on:
