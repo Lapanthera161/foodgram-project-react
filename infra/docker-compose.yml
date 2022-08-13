@@ -10,7 +10,7 @@ services:
       - ./.env
 
   backend:
-    image: lapanthera161/foodgram_backend:latest
+    image: lapanthera161/foodgram:latest
     restart: always
     volumes:
       - static_value:/app/static/
@@ -21,7 +21,9 @@ services:
       - ./.env
 
   frontend:
-    image: lapanthera161/foodgram_frontend:latest
+    build:
+      context: ../frontend
+      dockerfile: Dockerfile
     volumes:
       - ../frontend/:/app/result_build/
     depends_on:
@@ -36,7 +38,8 @@ services:
       - static_value:/app/static/
       - media_value:/app/media/
       - ../frontend/build:/usr/share/nginx/html/
-      - ../docs:/usr/share/nginx/html/api/docs/
+      - ../docs/redoc.html:/usr/share/nginx/html/api/docs/redoc.html
+      - ../docs/openapi-schema.yml:/usr/share/nginx/html/api/docs/openapi-schema.yml
 
     depends_on:
       - backend
