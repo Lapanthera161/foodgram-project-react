@@ -18,8 +18,8 @@ ALLOWED_HOSTS = ['*']
 CSRF_TRUSTED_ORIGINS = [
     'http://*localhost',
     'https://*localhost',
-    'http://*51.250.110.23',
-    'https://*51.250.110.23',
+    'http://*51.250.106.93',
+    'https://*51.250.106.93',
     'https://*lapanthera.sytes.net',
     'http://*lapanthera.sytes.net',
 ]
