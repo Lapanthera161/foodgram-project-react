@@ -8,17 +8,7 @@
 Проект развернут по адресу: http://51.250.19.35/
 
 
-# Шаблон наполнения .env (не включен в текущий репозиторий) расположенный по пути infra/.env 
-``` 
-DB_ENGINE=django.db.backends.postgresql 
-DB_NAME=postgres 
-POSTGRES_USER=postgres 
-POSTGRES_PASSWORD=postgres 
-DB_HOST=db 
-DB_PORT=5432 
-``` 
-## Как запустить проект в Docker контейнере
-
+## Запуск проекта в Docker контейнере
 
 - Установите Docker.
 
@@ -66,7 +56,6 @@ docker-compose exec backend python manage.py createsuperuser
 docker-compose exec backend python manage.py collectstatic --no-input
 ```
 
-
 # Шаблон наполнения .env (не включен в текущий репозиторий) расположенный по пути infra/.env 
 ``` 
 DB_ENGINE=django.db.backends.postgresql 
@@ -76,7 +65,6 @@ POSTGRES_PASSWORD=postgres
 DB_HOST=db 
 DB_PORT=5432 
 ```
-
 ### admin
 
 ```login
