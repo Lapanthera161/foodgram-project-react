@@ -17,10 +17,7 @@ POSTGRES_PASSWORD=postgres
 DB_HOST=db 
 DB_PORT=5432 
 ``` 
-## Как запустить проект: ## Запуск проекта в Docker контейнере
-=======
-
-## Запуск проекта в Docker контейнере
+## Как запустить проект в Docker контейнере
 
 
 - Установите Docker.
@@ -69,7 +66,6 @@ docker-compose exec backend python manage.py createsuperuser
 docker-compose exec backend python manage.py collectstatic --no-input
 ```
 
-=======
 
 # Шаблон наполнения .env (не включен в текущий репозиторий) расположенный по пути infra/.env 
 ``` 
@@ -88,8 +84,4 @@ ei.govorova@yandex.ru
 ```
 ```pass
 12345q
-
 ```
-=======
-```
-
