@@ -108,7 +108,7 @@ class RecipeViewSet(ModelViewSet):
             .annotate(ingredient_amount=Sum("amount"))
             .order_by("ingredient__name")
         )
-        final_list = "\n".join(
+        shopping_cart = "\n".join(
             [
                 f'{ingredient["ingredient__name"]} - '
                 f'{ingredient["ingredient_amount"]} '
@@ -116,21 +116,9 @@ class RecipeViewSet(ModelViewSet):
                 for ingredient in ingredients
             ]
         )
-        pdfmetrics.registerFont(
-            TTFont('Handicraft', 'data/Handicraft.ttf', 'UTF-8'))
-        response = HttpResponse(content_type='application/pdf')
-        response['Content-Disposition'] = ('attachment; '
-                                           'filename="shopping_list.pdf"')
-        page = canvas.Canvas(response)
-        page.setFont('Handicraft', size=24)
-        page.drawString(200, 800, 'Список покупок')
-        page.setFont('Handicraft', size=16)
-        height = 750
-        for i, (name, data) in enumerate(final_list.items(), 1):
-            page.drawString(75, height, (f'{data["recipe"]}:'
-                                         f'{i}. {name} - {data["amount"]} '
-                                         f'{data["measurement_unit"]}'))
-            height -= 25
-        page.showPage()
-        page.save()
+        filename = "shopping_cart.txt"
+        response = HttpResponse(shopping_cart, content_type="text/plain")
+        response["Content-Disposition"] = "attachment; filename={0}".format(
+            filename
+        )
         return response
